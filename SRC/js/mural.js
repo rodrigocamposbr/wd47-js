@@ -67,7 +67,20 @@ window.adicionaCartaoNoMural = function(cartaoObj) {
         }
     })
 
+   
     $(".mural").append(cartao)
-
 }
+$.ajax({
+    url: "https://ceep.herokuapp.com/cartoes/carregar"
+    ,method: "GET"
+    ,data: {usuario: "rodrigo.chirnev@gmail.com"}
+    ,dataType: "jsonp"
+    ,success: function (objeto){
+        const cartoes = objeto.cartoes
+        cartoes.forEach(function(cartao){
+            adicionaCartaoNoMural(cartao)
+        })
+    }
+})
+
 })()
